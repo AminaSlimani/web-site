@@ -1,0 +1,832 @@
+
+:root {
+    --primary-color: #0066cc;
+    --primary-dark: #0052a3;
+    --primary-light: #e6f2ff;
+    --secondary-color: #00a3cc;
+    --accent-color: #00cc99;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --text-dark: #1a1a2e;
+    --text-medium: #4a4a6a;
+    --text-light: #7a7a9a;
+    --bg-white: #ffffff;
+    --bg-light: #f8f9fa;
+    --bg-gray: #f0f2f5;
+    --border-color: #e0e4e8;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+    --font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    --primary-color: #4da6ff;
+    --primary-dark: #3399ff;
+    --primary-light: #1a3a5c;
+    --secondary-color: #00c4e6;
+    --text-dark: #e8e8f0;
+    --text-medium: #b0b0c0;
+    --text-light: #8080a0;
+    --bg-white: #1a1a2e;
+    --bg-light: #252540;
+    --bg-gray: #2a2a45;
+    --border-color: #3a3a55;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Reset & Base Styles */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-gray);
+    color: var(--text-dark);
+    line-height: 1.7;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+    min-height: 100vh;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================
+   Header Styles
+   ============================================ */
+.header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all var(--transition-normal);
+    backdrop-filter: blur(10px);
+}
+
+.dark-mode-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(15deg);
+}
+
+.dark-mode-toggle .sun {
+    display: none;
+}
+
+[data-theme="dark"] .dark-mode-toggle .moon {
+    display: none;
+}
+
+[data-theme="dark"] .dark-mode-toggle .sun {
+    display: inline;
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero {
+    background: linear-gradient(135deg, var(--primary-light), var(--bg-white));
+    padding: 60px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.hero > .container > p {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Search Container */
+.search-container {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    border-radius: 50px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: border-color var(--transition-normal);
+}
+
+.search-container:focus-within {
+    border-color: var(--primary-color);
+}
+
+.search-container input {
+    flex: 1;
+    padding: 18px 25px;
+    border: none;
+    font-size: 1rem;
+    font-family: var(--font-family);
+    background: transparent;
+    color: var(--text-dark);
+    outline: none;
+}
+
+.search-container input::placeholder {
+    color: var(--text-light);
+}
+
+.search-container button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 18px 25px;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container button:hover {
+    background: var(--primary-dark);
+}
+
+/* ============================================
+   Category Filter
+   ============================================ */
+.categories-section {
+    background: var(--bg-white);
+    padding: 25px 0;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+}
+
+.category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.category-btn {
+    padding: 12px 24px;
+    border: 2px solid var(--border-color);
+    background: var(--bg-white);
+    color: var(--text-medium);
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-family: var(--font-family);
+    font-weight: 600;
+    transition: all var(--transition-normal);
+}
+
+.category-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.category-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* ============================================
+   Main Content
+   ============================================ */
+.main-content {
+    padding: 40px 0;
+    min-height: 60vh;
+}
+
+/* Disclaimer Box */
+.disclaimer-box {
+    background: linear-gradient(135deg, #fff3cd, #ffeeba);
+    border-right: 4px solid var(--warning-color);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .disclaimer-box {
+    background: linear-gradient(135deg, #3d3500, #4a4200);
+    border-color: #ffc107;
+}
+
+.disclaimer-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.disclaimer-box h3 {
+    color: #856404;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+[data-theme="dark"] .disclaimer-box h3 {
+    color: #ffc107;
+}
+
+.disclaimer-box p {
+    color: #856404;
+    font-size: 0.95rem;
+    max-width: 800px;
+    line-height: 1.8;
+}
+
+[data-theme="dark"] .disclaimer-box p {
+    color: #e0d5a0;
+}
+
+/* Diseases Grid */
+.diseases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 30px;
+}
+
+/* Disease Card */
+.disease-card {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.disease-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.disease-card.hidden {
+    display: none;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.disease-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 25px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.disease-icon {
+    font-size: 2.5rem;
+}
+
+.disease-header h3 {
+    flex: 1;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.disease-english {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 12px;
+    border-radius: 15px;
+}
+
+/* Disease Content */
+.disease-content {
+    padding: 20px;
+}
+
+/* Accordion */
+.accordion {
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+}
+
+.accordion-btn {
+    width: 100%;
+    padding: 15px 20px;
+    background: var(--bg-light);
+    border: none;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-family);
+    transition: all var(--transition-fast);
+}
+
+.accordion-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.accordion-btn::after {
+    content: '+';
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    transition: transform var(--transition-fast);
+}
+
+.accordion-btn.active::after {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-normal);
+    background: var(--bg-white);
+}
+
+.accordion-content > * {
+    padding: 20px;
+}
+
+.accordion-btn.active + .accordion-content {
+    max-height: 1000px;
+}
+
+.accordion-content p {
+    color: var(--text-medium);
+    line-height: 1.8;
+}
+
+.accordion-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.accordion-content ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-medium);
+    position: relative;
+    padding-right: 25px;
+}
+
+.accordion-content ul li:last-child {
+    border-bottom: none;
+}
+
+.accordion-content ul li::before {
+    content: '✓';
+    position: absolute;
+    right: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+/* Food Tables */
+.food-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+.food-table th,
+.food-table td {
+    padding: 12px 15px;
+    text-align: right;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.food-table th {
+    background: var(--bg-light);
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.food-table tr:hover {
+    background: var(--primary-light);
+}
+
+.food-table.recommended {
+    border-right: 4px solid var(--success-color);
+}
+
+.food-table.avoid {
+    border-right: 4px solid var(--danger-color);
+}
+
+/* ============================================
+   Healthy Lifestyle Section
+   ============================================ */
+.lifestyle-section {
+    margin-bottom: 50px;
+}
+
+.lifestyle-section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.lifestyle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.lifestyle-card {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.lifestyle-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.lifestyle-header {
+    padding: 25px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.lifestyle-header.hydration {
+    background: linear-gradient(135deg, #00a3cc, #00cc99);
+}
+
+.lifestyle-header.sleep {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.lifestyle-header.activity {
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+}
+
+.lifestyle-header.food {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.lifestyle-header.prevention {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+}
+
+.lifestyle-icon {
+    font-size: 2.5rem;
+}
+
+.lifestyle-header h3 {
+    flex: 1;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.lifestyle-content {
+    padding: 20px;
+}
+
+.lifestyle-content p {
+    color: var(--text-medium);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.lifestyle-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.lifestyle-content ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-medium);
+    position: relative;
+    padding-right: 25px;
+}
+
+.lifestyle-content ul li:last-child {
+    border-bottom: none;
+}
+
+.lifestyle-content ul li::before {
+    content: '✓';
+    position: absolute;
+    right: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.lifestyle-content strong {
+    color: var(--primary-color);
+}
+
+.tip-box {
+    background: var(--primary-light);
+    padding: 15px;
+    border-radius: var(--border-radius-sm);
+    margin-top: 15px;
+}
+
+.tip-box h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.tip-box ul li::before {
+    content: '💡';
+    color: transparent;
+}
+
+/* ============================================
+   No Results Message
+   ============================================ */
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-medium);
+}
+
+.no-results h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.no-results p {
+    font-size: 1rem;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+    background: var(--text-dark);
+    color: var(--text-light);
+    padding: 40px 0 20px;
+    margin-top: 60px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.footer-section p,
+.footer-section li {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    padding: 5px 0;
+}
+
+.footer-section ul li::before {
+    content: '•';
+    color: var(--primary-color);
+    margin-left: 8px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    .search-container {
+        flex-direction: column;
+        border-radius: var(--border-radius);
+    }
+    
+    .search-container input {
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .diseases-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-filter {
+        gap: 8px;
+    }
+    
+    .category-btn {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .disease-header {
+        flex-wrap: wrap;
+    }
+    
+    .disease-header h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 40px 0;
+    }
+    
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+    
+    .disclaimer-box {
+        padding: 20px 15px;
+    }
+    
+    .accordion-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .food-table {
+        font-size: 0.85rem;
+    }
+    
+    .food-table th,
+    .food-table td {
+        padding: 8px 10px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .header,
+    .categories-section,
+    .dark-mode-toggle,
+    .search-container,
+    .footer {
+        display: none !important;
+    }
+    
+    .disease-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .accordion-content {
+        max-height: none !important;
+    }
+
+}
+@media(max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    img {
+        width: 100%;
+    }
+    
+}
